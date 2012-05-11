@@ -14,37 +14,23 @@ public class Spectate extends JavaPlugin {
 	public SpectateOff SpectateOff = new SpectateOff(this);
 
 	public void onDisable() {
-
 		for (Player players : getServer().getOnlinePlayers()) {
-
 			if (CommandExecutor.isSpectating.get(players) != null) {
-
 				if (CommandExecutor.isSpectating.get(players)) {
-
-					players.sendMessage("§7You were forced to stop spectating because of a server reload.");
-
+					players.sendMessage("\u00a77You were forced to stop spectating because of a server reload.");
 					SpectateOff.spectateOff(players);
-
 				}
-
 			}
-
 		}
 
 		System.out.println("Spectate is disabled!");
-
 	}
 
 	public void onEnable() {
-
 		getServer().getPluginManager().registerEvents(Listener, this);
-		
 		conf = getConfig();
-		
-		if (conf.get("canspectate Permission Enabled?") == null) {
-			
-			conf.set("canspectate Permission Enabled?", false);
-			
+		if (conf.get("permission-canspectate") == null) {
+			conf.set("permission-canspectate", false);
 		}
 		
 		saveConfig();
